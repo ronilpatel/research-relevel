@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    * {
+        text-align: center;
+        background-color: aliceblue;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ReSearch Results</title>
+</head>
+
+<body>
+    <h1>ReSearch Results</h1>
+    {% if not has_result %}
+    <p>{{ message }}</p>
+
+    {% else %}
+
+    <p>{{ total }} search results found: </p>
+    {% for paragraph in result %}
+    <p>Paragraph Index: {{ paragraph.index }}: <br>
+        {{ paragraph.paragraph }}</p>
+    {% endfor %}
+
+    {% endif %}
+
+</body>
+
+</html>

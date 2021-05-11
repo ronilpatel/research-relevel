@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            text-align: center;
+            background-color: aliceblue;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+        }
+
+        .button2:hover {
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        input[type=text] {
+            width: 250px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 5px 5px 5px 5px;
+        }
+        .text-placeholder{
+            margin-top: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>ReSearch</title>
+</head>
+
+<body>
+    <form action="/search/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <br>
+        <h1>ReSearch</h1>
+        <label for="input_document">
+            <h4>Select a Document</h4>
+        </label>
+        <input type="file" id="input_document" name="input_document" accept=".txt" required><br>
+        <br>
+
+        <br>
+        <input type="text" id="search_key" name="search_key" placeholder="Search.." required>
+        <br>
+        <label for="search_key" >
+            <h4 class="text-placeholder">Enter the word to be searched</h4>
+        </label>
+        <br>
+        <br>
+        <button type="submit" value="Submit" class="button button2">Search</button>
+
+    </form>
+</body>
+
+</html>
