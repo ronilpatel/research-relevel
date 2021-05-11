@@ -68,3 +68,42 @@ def create_inverted_index_dict(indexed_paras):
 
     inverted_index_dict_store = dict(inverted_index_dict_store)
     return inverted_index_dict_store
+
+
+def get_paragraph_list(inverted_index_dict, search_key, indexed_paragraphs):
+    para_list = list()
+
+    para_index_list = inverted_index_dict[search_key]
+    top_ten_paragraph_index = rank_top_ten_paragraph(para_index_list,
+                                                     indexed_paragraphs, search_key)
+
+    for para_index in top_ten_paragraph_index:
+        para_list.append({
+            'index': para_index,
+            'paragraph': indexed_paragraphs[para_index]
+        })
+
+    return para_list
+
+
+def get_search_results(document, search_key):
+    paragraphs = dict()
+    paragraphs['has_result'] = True
+    paragraphs['result'] = list()
+
+    indexed_paragraphs = document_pre_processing(doc=document)
+
+    inverted_index_dict = create_inverted_index_dict(indexed_paras=indexed_paragraphs)
+
+    if search_key in inverted_index_dict:
+        paragraphs['result'] = get_paragraph_list(inverted_index_dict=inverted_index_dict,
+                                                  search_key=search_key,
+                                                  indexed_paragraphs=indexed_paragraphs)
+
+    else:
+        paragraphs['has_result'] = False
+        paragraphs['message'] = 'No such word found!'
+
+    paragraphs['total'] = len(paragraphs['result'])
+
+    return paragraphs

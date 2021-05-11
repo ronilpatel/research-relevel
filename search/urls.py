@@ -1,7 +1,7 @@
-from django.conf.urls import url
-from .views import reSearchView
+from django.urls import path
+from .views import ReSearchView
 
 
 urlpatterns = [
-    url('search', reSearchView, name='research')
+    path('search/', ReSearchView.as_view(), name='research')
 ]

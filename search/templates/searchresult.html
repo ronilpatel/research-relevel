@@ -17,11 +17,12 @@
 <body>
     <h1>ReSearch Results</h1>
     {% if not has_result %}
-    <p>{{ message }}</p>
+    <h4 style="color:red;">{{ message }}</h4>
 
     {% else %}
 
-    <p>{{ total }} search results found: </p>
+    <h4 style="color:green;">{{ total }} search results found! </h4>
+    <h3>Here are the top 10 search results</h3>
     {% for paragraph in result %}
     <p>Paragraph Index: {{ paragraph.index }}: <br>
         {{ paragraph.paragraph }}</p>
