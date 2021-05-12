@@ -9,4 +9,4 @@
 4. Run all the test cases using: **python -m unittest**
 5. Start the server: **python manage.py runserver**
 
-**If you are running locally then add "127.0.0.0" to ALLOWED_HOSTS in the ***settings.py*** file.
+##### If you are running locally then add "127.0.0.0" to ALLOWED_HOSTS in the ***settings.py*** file.**
