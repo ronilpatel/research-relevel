@@ -17,8 +17,9 @@ def document_pre_processing(doc):
 
     paragraphs = doc_without_trailing_spaces.split('\n\n')
 
-    indexed_paragraphs = {index+1: value.lower() for index, value in enumerate(paragraphs)}
-    return indexed_paragraphs
+    indexed_paragraphs = {index+1: value.lower().strip() for index, value in enumerate(paragraphs)}
+    original_paragraphs = {index+1: value for index, value in enumerate(paragraphs)}
+    return indexed_paragraphs, original_paragraphs
 
 
 def clean_paragraph_words(paragraph):
@@ -91,7 +92,7 @@ def get_search_results(document, search_key):
     paragraphs['has_result'] = True
     paragraphs['result'] = list()
 
-    indexed_paragraphs = document_pre_processing(doc=document)
+    indexed_paragraphs, original_indexed_paragraphs = document_pre_processing(doc=document)
 
     inverted_index_dict = create_inverted_index_dict(indexed_paras=indexed_paragraphs)
 
@@ -99,6 +100,8 @@ def get_search_results(document, search_key):
         paragraphs['result'] = get_paragraph_list(inverted_index_dict=inverted_index_dict,
                                                   search_key=search_key,
                                                   indexed_paragraphs=indexed_paragraphs)
+        for result in paragraphs['result']:
+            result['paragraph'] = original_indexed_paragraphs[result['index']]
 
     else:
         paragraphs['has_result'] = False
